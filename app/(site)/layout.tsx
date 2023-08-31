@@ -1,4 +1,5 @@
 import 'pliny/search/algolia.css'
+import "./globals.css";
 
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from '@/node_modules/pliny/analytics'
@@ -9,7 +10,6 @@ import Footer from '@/components/Footer'
 import siteMetadata from '@/components/siteMetadata'
 import { ThemeProviders } from './theme-providers'
 import { Metadata } from 'next'
-import "./globals.css";
 
 const space_grotesk = Space_Grotesk({
   subsets: ['latin'],

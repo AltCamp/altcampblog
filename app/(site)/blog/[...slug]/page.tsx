@@ -3,6 +3,7 @@ import PostLayout from "@/layouts/PostLayout";
 import { Metadata } from "next";
 import siteMetadata from "@/components/siteMetadata";
 import { getSinglePost, getSlugs } from "@/sanity/sanity-utils";
+import { Pagination } from "@/types/Pagination";
 
 // export async function generateMetadata({
 //   params,
@@ -61,22 +62,35 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const slug = params.slug[0];
   const post = await getSinglePost(slug);
   const slugs = await getSlugs();
-  // console.log(slugs)
 
-  // const prev = coreContent(sortedPosts[postIndex + 1])
-  // const next = coreContent(sortedPosts[postIndex - 1])
+  let prev: Pagination = {}; // Initialize prev as an empty string
+  let next: Pagination = {}; // Initialize next as an empty string
 
-  // map through post to get the next and previous slug on the list 
-  const prev = slugs.map((slugger, index) => {
-    if(slugger == slug) {
-      return slugger
+  slugs.forEach((slugger, index) => {
+    if (slugger.slug === slug) {
+      // Check if the current element is not the first element
+      if (index > 0) {
+        // Assign the slug of the previous element to prev
+        prev.slug = slugs[index - 1].slug;
+        prev.title = slugs[index - 1].title;
+      }
     }
-  })
-  
+  });
+
+  slugs.forEach((slugger, index) => {
+    if (slugger.slug === slug) {
+      // Check if the current element is not the last element
+      if (index < slugs.length - 1) {
+        // Assign the slug of the next element to next
+        next.slug = slugs[index + 1].slug;
+        next.title = slugs[index + 1].title;
+      }
+    }
+  });
+
   return (
     <>
-      <PostLayout post={post} />
+      <PostLayout post={post} prev={prev} next={next} />
     </>
-  )
-  ;
+  );
 }

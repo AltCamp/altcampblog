@@ -10,6 +10,7 @@ import ScrollTopAndComment from "@/components/ScrollTopAndComment";
 import PortableBody from "@/components/portable";
 
 import { Post } from "@/types/Post";
+import { Pagination } from "@/types/Pagination";
 
 const discussUrl = (path: string) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
@@ -23,9 +24,14 @@ const postDateTemplate: Intl.DateTimeFormatOptions = {
   day: "numeric",
 };
 
-export default function PostLayout({ post }: { post: Post }) {
+type PostLayoutProps = {
+  post: Post;
+  prev: Pagination;
+  next: Pagination;
+};
+
+export default function PostLayout({ post, prev, next }: PostLayoutProps) {
   const { title, slug, body, author, publishedAt, _updatedAt, tags } = post;
-  const basePath = slug;
   const path = `blog/${slug}`;
 
   return (
@@ -33,7 +39,7 @@ export default function PostLayout({ post }: { post: Post }) {
       <ScrollTopAndComment />
       <article>
         <div className="xl:divide-y xl:divide-gray-200 xl:dark:divide-gray-700">
-          <header className="pt-6 xl:pb-6">
+          <header className="pt-6 pb-6 xl:pb-6">
             <div className="space-y-1 text-center">
               <dl className="space-y-10">
                 <div>
@@ -80,13 +86,10 @@ export default function PostLayout({ post }: { post: Post }) {
                         <dt className="sr-only">Twitter</dt>
                         <dd>
                           <Link
-                            href={authorDetails.twitter}
+                            href={`https://twitter.com/${authorDetails.twitter}`}
                             className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                           >
-                            {authorDetails.twitter.replace(
-                              "https://twitter.com/",
-                              "@"
-                            )}
+                            {`@${authorDetails.twitter}`}
                           </Link>
                         </dd>
                       </dl>
@@ -120,39 +123,39 @@ export default function PostLayout({ post }: { post: Post }) {
                     </h2>
                     <div className="flex flex-wrap">
                       {tags.map((tag) => (
-                        <Tag key={tag._id} tag={tag.title} />
+                        <Tag key={tag._id} tag={tag} />
                       ))}
                     </div>
                   </div>
                 )}
-                {/* {(next || prev) && (
+                {(next || prev) && (
                   <div className="flex justify-between py-4 xl:block xl:space-y-8 xl:py-8">
-                    {prev && prev.path && (
+                    {prev && prev.slug && (
                       <div>
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           Previous Article
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${prev.path}`}>{prev.title}</Link>
+                          <Link href={`/blog/${prev.slug}`}>{prev.title}</Link>
                         </div>
                       </div>
                     )}
-                    {next && next.path && (
+                    {next && next.slug && (
                       <div>
                         <h2 className="text-xs uppercase tracking-wide text-gray-500 dark:text-gray-400">
                           Next Article
                         </h2>
                         <div className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
-                          <Link href={`/${next.path}`}>{next.title}</Link>
+                          <Link href={`/blog/${next.slug}`}>{next.title}</Link>
                         </div>
                       </div>
                     )}
                   </div>
-                )} */}
+                )}
               </div>
               <div className="pt-4 xl:pt-8">
                 <Link
-                  href={`/${basePath}`}
+                  href={`/blog`}
                   className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400"
                   aria-label="Back to the blog"
                 >

@@ -48,7 +48,7 @@ export default function Home({ posts }: { posts: Post[] }) {
                           </h2>
                           <div className="flex flex-wrap">
                             {tags?.map((tag) => (
-                              <Tag key={tag._id} tag={tag.title} />
+                              <Tag key={tag._id} tag={tag} />
                             ))}
                           </div>
                         </div>
@@ -73,7 +73,7 @@ export default function Home({ posts }: { posts: Post[] }) {
           })}
         </ul>
       </div>
-      {posts.length > MAX_DISPLAY && (
+      {posts.length == MAX_DISPLAY && (
         <div className="flex justify-end text-base font-medium leading-6">
           <Link
             href="/blog"

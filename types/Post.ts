@@ -17,5 +17,5 @@ export type Post = {
     twitter: string;
   }[];
   publishedAt: string;
-  _updatedAt: string;
+  _updatedAt?: string;
 };
