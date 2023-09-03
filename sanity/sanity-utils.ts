@@ -4,7 +4,7 @@ import { Post } from "@/types/Post";
 import { Tag } from "@/types/Tag";
 import { Slug } from "@/types/Slug";
 
-export async function getPosts(): Promise<Post[]> {
+export async function getLatestPosts(): Promise<Post[]> {
   const query = groq`*[_type == "post"] | order(_createdAt desc) [0...5] {
     _id,
     title,
@@ -16,11 +16,54 @@ export async function getPosts(): Promise<Post[]> {
     },
     summary,
     publishedAt,
+    _createdAt
 }`;
   return createClient(config).fetch(query);
 }
 
-export async function getPostsByTag(slug: string): Promise<Post> {
+export async function getAllPostsCount(): Promise<number> {
+  const query = groq`count(*[_type == "post" && !(_id in path("drafts.**"))])`;
+  return createClient(config).fetch(query);
+}
+
+export async function getAllPostsWithPagination(lastCreatedAt: string): Promise<Post[]> {
+  const query = groq`*[_type == 'post' && ((_createdAt > $lastCreatedAt && $lastCreatedAt == '') || 
+  (_createdAt < $lastCreatedAt && $lastCreatedAt != ''))]
+| order(_createdAt desc)[0..5] {
+    _id,
+    title,
+    "slug": slug.current,
+    tags[]->{
+      _id,
+      title,
+      "slug": slug.current
+    },
+    summary,
+    publishedAt,
+    _createdAt
+}`;
+  return createClient(config).fetch(query, { lastCreatedAt });
+}
+
+export async function getAllPosts(): Promise<Post[]> {
+  const query = groq`*[_type == 'post']
+| order(_createdAt desc) {
+    _id,
+    title,
+    "slug": slug.current,
+    tags[]->{
+      _id,
+      title,
+      "slug": slug.current
+    },
+    summary,
+    publishedAt,
+    _createdAt
+}`;
+  return createClient(config).fetch(query);
+}
+
+export async function getPostsByTag(slug: string): Promise<Post[]> {
   const query = groq`*[_type == "post" && $slug in tags[]->slug.current] | order(_createdAt desc) {
     _id,
     title,
@@ -37,26 +80,6 @@ export async function getPostsByTag(slug: string): Promise<Post> {
   return createClient(config).fetch(query, { slug });
 }
 
-// let lastId: string | null = null;
-
-// export async function getPostWithPagination(): Promise<Post[]> {
-
-//   if (lastId === null) {
-//     // Get the initial lastId from localStorage
-//     lastId = localStorage.getItem('lastId');
-//   }
-//   const query = groq`*[_type == "article" && _id > $lastId] | order(_id) [0...5] {
-//       _id, title, body
-//   }`;
-
-//   if (result.length > 0) {
-//     lastId = result[result.length - 1]._id;
-//   } else {
-//     lastId = null; // Reached the end
-//   }
-
-//   return createClient(config).fetch(query, { lastId })
-// }
 
 export async function getSlugs(): Promise<Slug[]> {
   const query = groq`*[_type == "post"] | order(_createdAt desc) {

@@ -1,6 +1,6 @@
 import siteMetadata from "./siteMetadata";
 import Image from "next/image";
-import logo from "@/public/logonotext.svg";
+import logo from "@/public/static/favicons/logonotext.svg";
 import headerNavLinks from "@/components/headerNavLinks";
 import Link from "./Link";
 import MobileNav from './MobileNav'

@@ -18,4 +18,5 @@ export type Post = {
   }[];
   publishedAt: string;
   _updatedAt?: string;
+  _createdAt?: string;
 };

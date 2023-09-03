@@ -52,7 +52,7 @@ function CodeBlock(props: {
   return (
     <div
       className={cx(
-        "block grid my-6 transition-all duration-300 border relative border-transparent rounded-md bg-black dark:bg-[#e46cc405] shadow-md overflow-hidden",
+        "block my-6 transition-all duration-300 border relative border-transparent rounded-md bg-black dark:bg-[#e46cc405] shadow-md overflow-hidden",
         {
           "max-h-[200px] overflow-y-hidden": collapse,
         }

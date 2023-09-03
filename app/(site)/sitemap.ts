@@ -1,11 +1,20 @@
 import { MetadataRoute } from 'next'
-import { allBlogs } from 'contentlayer/generated'
+import { getAllPosts } from '@/sanity/sanity-utils'
 import siteMetadata from '@/components/siteMetadata'
+import {Post} from '@/types/Post'
+
+let allPosts: Post[];
+
+const getPosts = async () => {
+  const posts = await getAllPosts()
+
+  allPosts = posts;
+}
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const siteUrl = siteMetadata.siteUrl
-  const blogRoutes = allBlogs.map((post) => ({
-    url: `${siteUrl}/${post.path}`,
+  const blogRoutes = allPosts.map((post) => ({
+    url: `${siteUrl}/${post.slug}`,
     lastModified: post._updatedAt || post.publishedAt,
   }))
 

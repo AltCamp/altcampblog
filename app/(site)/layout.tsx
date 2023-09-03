@@ -1,5 +1,6 @@
-import 'pliny/search/algolia.css'
-import "./globals.css";
+import '@/node_modules/pliny/search/algolia.css'
+import '@/css/globals.css';
+
 
 import { Space_Grotesk } from 'next/font/google'
 import { Analytics, AnalyticsConfig } from '@/node_modules/pliny/analytics'

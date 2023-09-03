@@ -6,23 +6,56 @@ import { formatDate } from "@/node_modules/pliny/utils/formatDate";
 import Link from "@/components/Link";
 import Tag from "@/components/Tag";
 import siteMetadata from "@/components/siteMetadata";
-import { getTags } from "@/sanity/sanity-utils";
 import { Post } from "@/types/Post";
+import { Tag as TagType } from "@/types/Tag";
+import { useState, useRef, useEffect } from "react";
+import { getAllPostsWithPagination } from "@/sanity/sanity-utils";
 
-interface ListLayoutProps {
+type ListLayoutProps = {
   posts: Post[];
+  tags?: TagType[];
+  count?: number;
   title: string;
-}
+};
 
-export default async function ListLayoutWithTags({
+export default function ListLayoutWithTags({
   posts,
+  tags,
+  count,
   title,
 }: ListLayoutProps) {
+  const [allPosts, setAllPosts] = useState(posts);
+
+  const [lastCreatedAt, setLastCreated] = useState(
+    posts[posts.length - 1]._createdAt
+  );
+  const [loading, setLoading] = useState(true);
+
   const pathname = usePathname();
 
-  const tags = await getTags();
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const fetchNextPost = async (lastCreatedAt: string) => {
+            const data = await getAllPostsWithPagination(lastCreatedAt);
+            setLoading(false);
+            setAllPosts([...allPosts, ...data]);
+          };
+          if (lastCreatedAt) {
+            fetchNextPost(lastCreatedAt);
+          }
+        }
+      });
+    });
 
-  // console.log(tags);
+    const element: Element | null = document.querySelector(".scrollerFooter");
+
+    if (element) {
+      observer.observe(element);
+    }
+  }, []);
+
 
   return (
     <>
@@ -48,7 +81,7 @@ export default async function ListLayoutWithTags({
                 </Link>
               )}
               <ul>
-                {tags.map((t) => {
+                {tags?.map((t) => {
                   return (
                     <li key={t._id} className="my-3">
                       {pathname.split("/tags/")[1] === t.slug ? (
@@ -72,7 +105,7 @@ export default async function ListLayoutWithTags({
           </div>
           <div>
             <ul>
-              {posts.map((post) => {
+              {allPosts.map((post) => {
                 const { _id, slug, publishedAt, title, summary, tags } = post;
                 return (
                   <li key={_id} className="py-5">
@@ -110,9 +143,29 @@ export default async function ListLayoutWithTags({
                 );
               })}
             </ul>
-            {/* {pagination && pagination.totalPages > 1 && (
-              <Pagination currentPage={pagination.currentPage} totalPages={pagination.totalPages} />
-            )} */}
+            {loading && count != allPosts.length ? (
+              <div
+                role="status"
+                className="scrollerFooter max-w-sm animate-pulse"
+              >
+                <div className="h-3.5 bg-gray-200 rounded-full dark:bg-gray-700 w-40 mb-4"></div>
+                <div className="h-5 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px] mb-2.5"></div>
+
+                <div className="flex gap-3 mb-3">
+                  <div className="h-2.5 w-1/2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                  <div className="h-2.5 w-1/2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[360px]"></div>
+                </div>
+
+                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                <div className="h-2 bg-gray-200 rounded-full dark:bg-gray-700 max-w-[330px] mb-2.5"></div>
+                <span className="sr-only">Loading...</span>
+              </div>
+            ) : (
+              <div className="flex mb-3 mt-5 underline decoration-wavy ">
+                Nothing more to see here. Browse other sections
+              </div>
+            )}
           </div>
         </div>
       </div>

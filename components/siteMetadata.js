@@ -6,13 +6,13 @@ const siteMetadata = {
     description: 'A blog for AltCampers by AltCampers',
     language: 'en-us',
     theme: 'system', // system, dark or light
-    siteUrl: 'https://tailwind-nextjs-starter-blog.vercel.app',
-    siteRepo: 'https://github.com/timlrx/tailwind-nextjs-starter-blog',
-    siteLogo: '/static/images/logo.png',
-    socialBanner: '/static/images/twitter-card.png',
+    siteUrl: 'https://blog.thealtcamp.com',
+    siteRepo: 'https://github.com/AltCamp/altcampblog',
+    siteLogo: '/static/images/AuthBlackLogo.png',
+    socialBanner: '/static/images/AuthBlackLogo.png',
     mastodon: 'https://mastodon.social/@mastodonuser',
-    email: 'address@yoursite.com',
-    github: 'https://github.com',
+    email: 'admin@thealtcamp.com',
+    github: 'https://github.com/AltCamp',
     twitter: 'https://twitter.com/Twitter',
     facebook: 'https://facebook.com',
     youtube: 'https://youtube.com',
@@ -77,14 +77,14 @@ const siteMetadata = {
       kbarConfig: {
         searchDocumentsPath: 'search.json', // path to load documents to search
       },
-      // provider: 'algolia',
-      // algoliaConfig: {
-      //   // The application ID provided by Algolia
-      //   appId: 'R2IYF7ETH7',
-      //   // Public API key: it is safe to commit it
-      //   apiKey: '599cec31baffa4868cae4e79f180729b',
-      //   indexName: 'docsearch',
-      // },
+      provider: 'algolia',
+      algoliaConfig: {
+        // The application ID provided by Algolia
+        appId: process.env.NEXT_PUBLIC_ALGOLIA_APPLICATION_ID,
+        // Public API key: it is safe to commit it
+        apiKey: process.env.NEXT_PUBLIC_ALGOLIA_SEARCH_ONLY_API_KEY,
+        indexName: 'test_ALTCAMP',
+      },
     },
   }
   
