@@ -14,7 +14,7 @@ import { Pagination } from "@/types/Pagination";
 
 const discussUrl = (path: string) =>
   `https://mobile.twitter.com/search?q=${encodeURIComponent(
-    `${siteMetadata.siteUrl}/${path}`
+    `${siteMetadata.siteUrl}/${path}`,
   )}`;
 
 const postDateTemplate: Intl.DateTimeFormatOptions = {
@@ -48,7 +48,7 @@ export default function PostLayout({ post, prev, next }: PostLayoutProps) {
                     <time dateTime={publishedAt}>
                       {new Date(publishedAt).toLocaleDateString(
                         siteMetadata.locale,
-                        postDateTemplate
+                        postDateTemplate,
                       )}
                     </time>
                   </dd>

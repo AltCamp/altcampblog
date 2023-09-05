@@ -11,7 +11,7 @@ const Embed = (props: Props) => {
     <iframe
       src={props.value.url}
       className="w-full border rounded-md aspect-video border-red-300"
-      frameBorder="0"
+      title="iframe"
     ></iframe>
   );
 };

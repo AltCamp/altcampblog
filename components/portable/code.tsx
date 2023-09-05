@@ -4,9 +4,7 @@ import {
   ArrowsPointingInIcon,
   ClipboardIcon,
 } from "@heroicons/react/20/solid";
-import clipboard from 'clipboard'
-
-
+import clipboard from "clipboard";
 
 import cx from "classnames";
 
@@ -23,10 +21,10 @@ function CodeBlock(props: {
 }) {
   const { value } = props;
   const [collapse, setCollapse] = useState(false);
-  const [copied, setCopied] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    let lines = count_line_numbers(value.code);
+    const lines = count_line_numbers(value.code);
     if (lines > 15) {
       setCollapse(true);
     } else {
@@ -34,7 +32,7 @@ function CodeBlock(props: {
     }
   }, [value.code]);
 
-  let handleCollapse = () => {
+  const handleCollapse = () => {
     setCollapse(!collapse);
   };
 
@@ -45,7 +43,7 @@ function CodeBlock(props: {
 
   useEffect(() => {
     setTimeout(() => {
-      setCopied(false)
+      setCopied(false);
     }, 3000);
   }, [copied]);
 
@@ -55,20 +53,17 @@ function CodeBlock(props: {
         "block my-6 transition-all duration-300 border relative border-transparent rounded-md bg-black dark:bg-[#e46cc405] shadow-md overflow-hidden",
         {
           "max-h-[200px] overflow-y-hidden": collapse,
-        }
+        },
       )}
     >
       <div className="flex justify-between items-center text-gray-700 h-10 w-full bg-white p-2">
-        <div className="">
-          {value?.filename}
-        </div>
+        <div className="">{value?.filename}</div>
         <div className="w-fit h-fit flex items-center gap-1">
-          <button>
-            {copied ? 'Copied' : 'Copy'}
-          </button>
-          <ClipboardIcon 
-           onClick={() => copyToClipboard(value.code)}
-          className='w-5 h-5 cursor-pointer transition-all duration-200 hover:shadow-md hover:shadow-red-500' />
+          <button>{copied ? "Copied" : "Copy"}</button>
+          <ClipboardIcon
+            onClick={() => copyToClipboard(value.code)}
+            className="w-5 h-5 cursor-pointer transition-all duration-200 hover:shadow-md hover:shadow-red-500"
+          />
         </div>
       </div>
       <pre className={`command-line bg-transparent language-${value.language}`}>
@@ -80,7 +75,7 @@ function CodeBlock(props: {
         onClick={handleCollapse}
         className={cx(
           "bottom-0 right-0 w-full p-2 glass-box grid place-items-center",
-          { absolute: collapse }
+          { absolute: collapse },
         )}
       >
         {!collapse ? (

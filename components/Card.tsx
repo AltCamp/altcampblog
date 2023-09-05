@@ -1,18 +1,18 @@
-import Image from './Image'
-import Link from './Link'
+import Image from "./Image";
+import Link from "./Link";
 
 type ProjectCardProps = {
   title: string;
   summary: string;
   projectImage: string | null;
   slug: string;
-}
+};
 
 const Card = ({ title, summary, projectImage, slug }: ProjectCardProps) => (
   <div className="md max-w-[544px] p-4 md:w-1/2">
     <div
       className={`${
-        projectImage && 'h-full'
+        projectImage && "h-full"
       }  overflow-hidden rounded-md border-2 border-gray-200 border-opacity-60 dark:border-gray-700`}
     >
       {projectImage &&
@@ -45,7 +45,9 @@ const Card = ({ title, summary, projectImage, slug }: ProjectCardProps) => (
             title
           )}
         </h2>
-        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">{summary}</p>
+        <p className="prose mb-3 max-w-none text-gray-500 dark:text-gray-400">
+          {summary}
+        </p>
         {slug && (
           <Link
             href={`/blog/${slug}`}
@@ -58,6 +60,6 @@ const Card = ({ title, summary, projectImage, slug }: ProjectCardProps) => (
       </div>
     </div>
   </div>
-)
+);
 
-export default Card
+export default Card;

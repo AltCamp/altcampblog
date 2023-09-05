@@ -20,7 +20,9 @@ const components: PortableTextComponents = {
       );
     },
     em: ({ children }) => (
-      <em className="italic text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 underline ">{children}</em>
+      <em className="italic text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 underline ">
+        {children}
+      </em>
     ),
     strong: ({ children }) => (
       <strong className="text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-sans">
@@ -28,9 +30,7 @@ const components: PortableTextComponents = {
       </strong>
     ),
     code: ({ children }) => (
-      <code className=" p-2 text-[12px] rounded-md">
-        {children}
-      </code>
+      <code className=" p-2 text-[12px] rounded-md">{children}</code>
     ),
     link: ({ value, children }) => {
       const target = (value?.href || "").startsWith("http")
@@ -56,34 +56,22 @@ const components: PortableTextComponents = {
   },
   block: {
     h1: ({ children }) => (
-      <h1
-        className="mt-10 text-4xl font-bold "
-        id={toUrl(children)}
-      >
+      <h1 className="mt-10 text-4xl font-bold " id={toUrl(children)}>
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2
-        className="mt-10 mb-4 text-3xl font-bold "
-        id={toUrl(children)}
-      >
+      <h2 className="mt-10 mb-4 text-3xl font-bold " id={toUrl(children)}>
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-10 mb-4 text-2xl font-bold ">
-        {children}
-      </h3>
+      <h3 className="mt-10 mb-4 text-2xl font-bold ">{children}</h3>
     ),
     h4: ({ children }) => (
-      <h4 className="mt-10 mb-4 text-xl font-bold ">
-        {children}
-      </h4>
+      <h4 className="mt-10 mb-4 text-xl font-bold ">{children}</h4>
     ),
-    normal: ({ children }) => (
-      <p className="my-4 leading-loose ">{children}</p>
-    ),
+    normal: ({ children }) => <p className="my-4 leading-loose ">{children}</p>,
     blockquote: BlockQuote,
   },
   list: {

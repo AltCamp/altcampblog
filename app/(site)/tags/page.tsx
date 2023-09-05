@@ -1,10 +1,12 @@
-import Link from '@/components/Link'
-import Tag from '@/components/Tag'
-import { genPageMetadata } from '../seo'
-import { getTags } from '@/sanity/sanity-utils'
+import Link from "@/components/Link";
+import Tag from "@/components/Tag";
+import { genPageMetadata } from "../seo";
+import { getTags } from "@/sanity/sanity-utils";
 
-
-export const metadata = genPageMetadata({ title: 'Tags', description: 'Things I blog about' })
+export const metadata = genPageMetadata({
+  title: "Tags",
+  description: "Things I blog about",
+});
 
 export default async function Page() {
   const tags = await getTags();
@@ -18,7 +20,7 @@ export default async function Page() {
           </h1>
         </div>
         <div className="flex max-w-lg flex-wrap">
-          {tags.length === 0 && 'No tags found.'}
+          {tags.length === 0 && "No tags found."}
           {tags.map((t) => {
             return (
               <div key={t._id} className="mb-2 mr-5 mt-2">
@@ -31,10 +33,10 @@ export default async function Page() {
                   {` (${t.postCount})`}
                 </Link>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </>
-  )
+  );
 }

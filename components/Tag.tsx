@@ -1,7 +1,7 @@
-import Link from 'next/link'
-import { Tag } from '@/types/Tag'
+import Link from "next/link";
+import { Tag } from "@/types/Tag";
 
-const Tag = ({ tag }: {tag: Tag}) => {
+const Tag = ({ tag }: { tag: Tag }) => {
   return (
     <Link
       href={`/tags/${tag.slug}`}
@@ -9,7 +9,7 @@ const Tag = ({ tag }: {tag: Tag}) => {
     >
       {tag.title}
     </Link>
-  )
-}
+  );
+};
 
-export default Tag
+export default Tag;

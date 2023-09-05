@@ -1,7 +1,7 @@
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import config from '@/sanity/config/client-config'
+import config from "@/sanity/config/client-config";
 import { useNextSanityImage } from "next-sanity-image";
-import { createClient } from '@sanity/client';
+import { createClient } from "@sanity/client";
 
 const configuredSanityClient = createClient(config);
 
