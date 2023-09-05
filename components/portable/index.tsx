@@ -11,6 +11,7 @@ require("prismjs/components/prism-jsx");
 require("prismjs/components/prism-python");
 
 type Props = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
 };
 

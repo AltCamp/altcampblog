@@ -54,7 +54,7 @@ export default function ListLayoutWithTags({
     if (element) {
       observer.observe(element);
     }
-  }, []);
+  }, [allPosts, lastCreatedAt]);
 
   return (
     <>

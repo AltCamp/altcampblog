@@ -1,4 +1,5 @@
 import SanityImage from "./sanity-image";
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function NextImage(props: any) {
   const { value, alt } = props;
   return (
