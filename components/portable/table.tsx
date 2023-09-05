@@ -16,14 +16,12 @@ type Props = {
 };
 
 export function TableBlock({ value }: Props) {
-  let { rows } = value;
-  let head = rows[0];
-  let body = rows.slice(1);
+  const { rows } = value;
+  const head = rows[0];
+  const body = rows.slice(1);
   return (
     <div className="overflow-x-auto w-full">
-      <table
-        className="table-auto text-left my-6 w-full transition-all duration-300 overflow-x-scroll rounded-md p-4 border-spacing-2 bg-gray-500"
-      >
+      <table className="table-auto text-left my-6 w-full transition-all duration-300 overflow-x-scroll rounded-md p-4 border-spacing-2 bg-gray-500">
         <thead>
           <tr>
             {head?.cells.map((cell) => (
@@ -40,8 +38,9 @@ export function TableBlock({ value }: Props) {
           {body?.map((row) => (
             <tr key={row._key}>
               {row.cells.map((cell) => (
-                <td key={cell} 
-                className="p-4 font-bold cursor-pointer text-gray-200 bg-gray-600 dark:text-gray-600 dark:bg-gray-200 min-w-[200px]"
+                <td
+                  key={cell}
+                  className="p-4 font-bold cursor-pointer text-gray-200 bg-gray-600 dark:text-gray-600 dark:bg-gray-200 min-w-[200px]"
                 >
                   {cell}
                 </td>

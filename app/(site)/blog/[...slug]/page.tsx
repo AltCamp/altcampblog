@@ -5,7 +5,7 @@ import { Metadata } from "next";
 import siteMetadata from "@/components/siteMetadata";
 import { getSinglePost, getSlugs } from "@/sanity/sanity-utils";
 import { Pagination } from "@/types/Pagination";
-import PageTitle from "@/components/PageTitle"
+import PageTitle from "@/components/PageTitle";
 
 export async function generateMetadata({
   params,
@@ -15,18 +15,20 @@ export async function generateMetadata({
   const slug = params.slug;
   const post = await getSinglePost(slug);
   if (!post) {
-    return
+    return;
   }
 
-  const publishedAt = new Date(post.publishedAt).toISOString()
-  const modifiedAt = new Date(post._updatedAt || post.publishedAt).toISOString()
-  const authors = post?.author?.map((author) => author.name)
-  let imageList = [siteMetadata.socialBanner]
+  const publishedAt = new Date(post.publishedAt).toISOString();
+  const modifiedAt = new Date(
+    post._updatedAt || post.publishedAt,
+  ).toISOString();
+  const authors = post?.author?.map((author) => author.name);
+  const imageList = [siteMetadata.socialBanner];
   const ogImages = imageList.map((img) => {
     return {
-      url: img.includes('http') ? img : siteMetadata.siteUrl + img,
-    }
-  })
+      url: img.includes("http") ? img : siteMetadata.siteUrl + img,
+    };
+  });
 
   return {
     title: post.title,
@@ -35,16 +37,16 @@ export async function generateMetadata({
       title: post.title,
       description: post.summary,
       siteName: siteMetadata.title,
-      locale: 'en_US',
-      type: 'article',
+      locale: "en_US",
+      type: "article",
       publishedTime: publishedAt,
       modifiedTime: modifiedAt,
-      url: './',
+      url: "./",
       images: ogImages,
       authors: authors ? authors : [siteMetadata.author],
     },
     twitter: {
-      card: 'summary_large_image',
+      card: "summary_large_image",
       title: post.title,
       description: post.summary,
       images: imageList,
@@ -57,8 +59,8 @@ export default async function Page({ params }: { params: { slug: string } }) {
   const post = await getSinglePost(slug);
   const slugs = await getSlugs();
 
-  let prev: Pagination = {}; // Initialize prev as an empty string
-  let next: Pagination = {}; // Initialize next as an empty string
+  const prev: Pagination = {}; // Initialize prev as an empty string
+  const next: Pagination = {}; // Initialize next as an empty string
 
   slugs.forEach((slugger, index) => {
     if (slugger.slug === slug) {
@@ -84,18 +86,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
-    {!post ? (
-      <div className="mt-24 text-center">
-        <PageTitle>
-          Under Construction{' '}
-          <span role="img" aria-label="roadwork sign">
-            🚧
-          </span>
-        </PageTitle>
-      </div>
-    ) : (
-      <PostLayout post={post} prev={prev} next={next} />
-    )}
+      {!post ? (
+        <div className="mt-24 text-center">
+          <PageTitle>
+            Under Construction{" "}
+            <span role="img" aria-label="roadwork sign">
+              🚧
+            </span>
+          </PageTitle>
+        </div>
+      ) : (
+        <PostLayout post={post} prev={prev} next={next} />
+      )}
     </>
   );
 }

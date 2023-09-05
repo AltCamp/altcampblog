@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import config from "@/sanity/config/client-config";
 import { NextStudio } from "next-sanity/studio";

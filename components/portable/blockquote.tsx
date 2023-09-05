@@ -1,7 +1,10 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export default function BlockQuote(props: any) {
   return (
-    <blockquote className="p-4 transition-all duration-500 border rounded-md 
-    my-6 bg-gradient-to-r text-lg from-primary-500 border-primary-500">
+    <blockquote
+      className="p-4 transition-all duration-500 border rounded-md 
+    my-6 bg-gradient-to-r text-lg from-primary-500 border-primary-500"
+    >
       <svg
         aria-hidden="true"
         className="w-6 h-6  text-primary-500"

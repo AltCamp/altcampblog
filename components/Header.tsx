@@ -3,9 +3,9 @@ import Image from "next/image";
 import logo from "@/public/static/favicons/logonotext.svg";
 import headerNavLinks from "@/components/headerNavLinks";
 import Link from "./Link";
-import MobileNav from './MobileNav'
+import MobileNav from "./MobileNav";
 import ThemeSwitch from "./ThemeSwitch";
-import SearchButton from './SearchButton';
+import SearchButton from "./SearchButton";
 
 const Header = () => {
   return (
