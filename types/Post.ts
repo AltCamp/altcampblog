@@ -4,6 +4,7 @@ export type Post = {
   _id: string;
   title: string;
   slug: string;
+  projectImage: string | null;
   tags: {
     _id: string;
     title: string;

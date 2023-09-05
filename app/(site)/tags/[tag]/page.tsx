@@ -23,7 +23,6 @@ export default async function TagPage({ params }: { params: { tag: string } }) {
   const tag = params.tag;
   const posts = await getPostsByTag(tag);
   const tags = await getTags();
-  // console.log(posts)
   // Capitalize first letter and convert space to dash
   const title = tag[0].toUpperCase() + tag.split(' ').join('-').slice(1)
   

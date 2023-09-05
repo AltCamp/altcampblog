@@ -5,6 +5,7 @@ import { Metadata } from "next";
 import siteMetadata from "@/components/siteMetadata";
 import { getSinglePost, getSlugs } from "@/sanity/sanity-utils";
 import { Pagination } from "@/types/Pagination";
+import PageTitle from "@/components/PageTitle"
 
 export async function generateMetadata({
   params,
@@ -83,7 +84,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
   return (
     <>
+    {!post ? (
+      <div className="mt-24 text-center">
+        <PageTitle>
+          Under Construction{' '}
+          <span role="img" aria-label="roadwork sign">
+            🚧
+          </span>
+        </PageTitle>
+      </div>
+    ) : (
       <PostLayout post={post} prev={prev} next={next} />
+    )}
     </>
   );
 }
