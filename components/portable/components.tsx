@@ -57,30 +57,46 @@ const components: PortableTextComponents = {
   },
   block: {
     h1: ({ children }) => (
-      <h1 className="mt-10 text-4xl font-bold " id={toUrl(children)}>
+      <h1
+        className="mt-10 text-4xl font-bold dark:prose-invert "
+        id={toUrl(children)}
+      >
         {children}
       </h1>
     ),
     h2: ({ children }) => (
-      <h2 className="mt-10 mb-4 text-3xl font-bold " id={toUrl(children)}>
+      <h2
+        className="mt-10 mb-4 text-3xl font-bold dark:prose-invert "
+        id={toUrl(children)}
+      >
         {children}
       </h2>
     ),
     h3: ({ children }) => (
-      <h3 className="mt-10 mb-4 text-2xl font-bold ">{children}</h3>
+      <h3 className="mt-10 mb-4 text-2xl font-bold dark:prose-invert">
+        {children}
+      </h3>
     ),
     h4: ({ children }) => (
-      <h4 className="mt-10 mb-4 text-xl font-bold ">{children}</h4>
+      <h4 className="mt-10 mb-4 text-xl font-bold dark:prose-invert ">
+        {children}
+      </h4>
     ),
-    normal: ({ children }) => <p className="my-4 leading-loose ">{children}</p>,
+    normal: ({ children }) => (
+      <p className="my-4 leading-loose dark:prose-invert ">{children}</p>
+    ),
     blockquote: BlockQuote,
   },
   list: {
     bullet: ({ children }) => (
-      <ul className="ml-12 space-y-2 list-disc">{children}</ul>
+      <ul className="ml-12 space-y-2 list-disc dark:prose-invert">
+        {children}
+      </ul>
     ),
     number: ({ children }) => (
-      <ol className="ml-12 space-y-2 list-decimal">{children}</ol>
+      <ol className="ml-12 space-y-2 list-decimal dark:prose-invert">
+        {children}
+      </ol>
     ),
   },
 };
