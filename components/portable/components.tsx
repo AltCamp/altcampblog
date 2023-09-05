@@ -12,6 +12,7 @@ import { TableBlock } from "./table";
 
 const components: PortableTextComponents = {
   marks: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     latex: (props: any) => {
       return (
         <span className="mx-2 text-primary-500 hover:text-primary-600 dark:hover:text-primary-400">
