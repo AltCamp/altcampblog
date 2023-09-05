@@ -21,7 +21,7 @@ export default function PortableBody({ value }: Props) {
   }, []);
 
   return (
-    <div className="prose max-w-none font-sans text-[15px] pb-8 pt-10 text-black dark:text-[#ffffffe7] ">
+    <div className="prose max-w-none font-sans text-[15px] pb-8 text-black dark:text-[#ffffffe7] ">
       <PortableText value={value} components={components} />
     </div>
   );
