@@ -27,7 +27,7 @@ export default function ListLayoutWithTags({
   const [allPosts, setAllPosts] = useState(posts);
 
   const [lastCreatedAt, setLastCreated] = useState(
-    posts[posts.length - 1]._createdAt
+    posts[posts?.length - 1]?._createdAt
   );
   const [loading, setLoading] = useState(true);
 
@@ -143,7 +143,7 @@ export default function ListLayoutWithTags({
                 );
               })}
             </ul>
-            {loading && count != allPosts.length ? (
+            {count && loading && (count != allPosts.length) ? (
               <div
                 role="status"
                 className="scrollerFooter max-w-sm animate-pulse"

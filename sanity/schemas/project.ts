@@ -1,8 +1,8 @@
 import { Rule } from "sanity"
 
 export default {
-    name: 'post',
-    title: 'Post',
+    name: 'project',
+    title: 'Project',
     type: 'document',
     fields: [
       {
@@ -18,6 +18,15 @@ export default {
         options: {
           source: 'title',
           maxLength: 96
+        },
+        validation: (Rule: Rule) => Rule.required()
+      },
+      {
+        name: 'projectImage',
+        title: 'Project Image',
+        type: 'image',
+        options: {
+          hotspot: true
         },
         validation: (Rule: Rule) => Rule.required()
       },
