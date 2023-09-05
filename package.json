@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint --fix --dir pages --dir app --dir components --dir lib --dir layouts --dir scripts"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
@@ -46,6 +46,18 @@
   },
   "devDependencies": {
     "@types/prismjs": "^1.26.0",
-    "@types/react-katex": "^3.0.0"
+    "@types/react-katex": "^3.0.0",
+    "@types/react": "^18.2.14",
+    "@typescript-eslint/eslint-plugin": "^6.1.0",
+    "@typescript-eslint/parser": "^6.1.0",
+    "eslint": "^8.45.0",
+    "eslint-config-next": "13.4.12",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.0",
+    "prettier": "^3.0.0",
+    "prettier-plugin-tailwindcss": "^0.4.1",
+    "typescript": "^5.1.3"
   }
 }
